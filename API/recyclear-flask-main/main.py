@@ -12,13 +12,15 @@ import string
 
 app = Flask(__name__)
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "key/recyclear-dev-0003-8859ed001a13.json"
+# input your key file here
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = ""
 
+# input your credentials database here
 config = {
-    'user': 'recyclear-admin',
-    'password': 'recyclear-admin',
-    'host': '34.101.230.24',
-    'database': 'recyclear'
+    'user': '',
+    'password': '',
+    'host': '',
+    'database': ''
 }
 
 conn = mysql.connector.connect(**config)
@@ -90,7 +92,8 @@ def predict():
     user_id = request.form['user_id']
     str_random = generate_random_string()
 
-    bucket_name = 'recyclear-images-classification'
+    # input your storage bucket here
+    bucket_name = ''
     destination_blob_name = str(datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")) + str_random + image_name.replace(" ", "")
 
     upload_to_gcs(image, bucket_name, destination_blob_name)
@@ -109,7 +112,8 @@ def predict_api():
         image_name = image.filename
         user_id = request.form['user_id']
         str_random = generate_random_string()
-        bucket_name = 'recyclear-images-classification'
+        # input your storage bucket here
+        bucket_name = ''
         destination_blob_name = str(datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")) + str_random + image_name.replace(" ", "")
 
         upload_to_gcs(image, bucket_name, destination_blob_name)
